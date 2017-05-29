@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<version>2.0.0.GIT-e0917bf.BUILD-20170421-1451+0900</version>
+		<factoryClassName>com.ibm.jp.awag2.generator.AWAG2GeneratorFactory</factoryClassName>
+<!-- 	<factoryClassName>com.ibm.jp.awag.generator.DefaultGeneratorFactory</factoryClassName> -->
+<!-- logger, messageprop.... -->
+</config>

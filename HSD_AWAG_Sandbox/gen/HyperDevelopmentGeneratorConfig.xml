@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<dataLoaderClassName>com.ibm.jp.awag2.generator.IntegratedRepositoryDataLoader</dataLoaderClassName>
+	<dataFilePath>IntegratedRepositoryInterfaceData.xml</dataFilePath>
+	<printTimeStampToOutputFile>false</printTimeStampToOutputFile>
+	<templateSets>
+		<templateSet name="conf">
+ 			<commonfile>true</commonfile>
+			<outputdir>./WebContent/WEB-INF</outputdir>
+			<encoding>UTF-8</encoding>
+			<templatePackage>/com/ibm/jp/awag2/template/conf</templatePackage>
+			<templates>
+				<template name="persistencexml">
+					<active>true</active>
+					<dir>./src/META-INF</dir>
+					<fileName>persistence.xml</fileName>
+					<allowOverWrite>true</allowOverWrite>
+				</template>
+				<template name="beansxml">
+					<active>true</active>
+					<dir>{outputdir}</dir>
+					<fileName>beans.xml</fileName>
+					<allowOverWrite>true</allowOverWrite>
+				</template>
+				<template name="AWAGCommonMessages">
+					<active>true</active>
+					<dir>{outputdir}/conf</dir>
+					<fileName>AWAGCommonMessages.properties</fileName>
+					<allowOverWrite>true</allowOverWrite>
+				</template>
+				<template name="AWAGCommonMessages_en">
+					<active>true</active>
+					<dir>{outputdir}/conf</dir>
+					<fileName>AWAGCommonMessages_en.properties</fileName>
+					<allowOverWrite>true</allowOverWrite>
+				</template>
+				<template name="AWAGCommonMessages_ja">
+					<active>true</active>
+					<dir>{outputdir}/conf</dir>
+					<fileName>AWAGCommonMessages_ja.properties</fileName>
+					<allowOverWrite>true</allowOverWrite>
+				</template>
+				<template name="log4j2xml">
+					<active>true</active>
+					<dir>{outputdir}/conf</dir>
+					<fileName>log4j2.xml</fileName>
+					<allowOverWrite>true</allowOverWrite>
+				</template>
+				<template name="ValidationMessages">
+						<active>true</active>
+					<dir>{outputdir}/conf</dir>
+					<fileName>ValidationMessages.properties</fileName>
+					<allowOverWrite>true</allowOverWrite>
+				</template>
+				<template name="webxml">
+					<active>true</active>
+					<dir>{outputdir}</dir>
+					<fileName>web.xml</fileName>
+					<allowOverWrite>true</allowOverWrite>
+				</template>
+			</templates>
+		</templateSet>
+		<templateSet name="java_Resource">
+			<printTimeStampToOutputFile>true</printTimeStampToOutputFile>
+			<outputdir>./src/{appPackage}</outputdir>
+			<encoding>UTF-8</encoding>
+			<templatePackage>/com/ibm/jp/awag2/template/java</templatePackage>
+			<templates>
+				<template name="InputDTO">
+					<active>true</active>
+					<dir>{outputdir}/dto</dir>
+					<fileName>{id}InputDTO.java</fileName>
+					<allowOverWrite>true</allowOverWrite>
+				</template>
+				<template name="OutputDTO">
+					<active>true</active>
+					<dir>{outputdir}/dto</dir>
+					<fileName>{id}OutputDTO.java</fileName>
+					<allowOverWrite>true</allowOverWrite>
+				</template>
+				<template name="ResourceManager">
+					<active>true</active>
+					<dir>{outputdir}/resource</dir>
+					<fileName>{id}ResourceManager.java</fileName>
+					<allowOverWrite>true</allowOverWrite>
+				</template>
+				<template name="Resource">
+					<active>true</active>
+					<dir>{outputdir}/resource/impl</dir>
+					<fileName>{id}Resource.java</fileName>
+					<allowOverWrite>false</allowOverWrite>
+				</template>
+				<template name="ServiceCustomize">
+					<active>true</active>
+					<dir>{outputdir}/logic/impl</dir>
+					<fileName>{id}ServiceCustomize.java</fileName>
+					<allowOverWrite>false</allowOverWrite>
+				</template>
+				<template name="Service">
+					<active>true</active>
+					<dir>{outputdir}/logic/impl</dir>
+					<fileName>{id}Service.java</fileName>
+					<allowOverWrite>true</allowOverWrite>
+				</template>
+			</templates>
+		</templateSet>
+		<templateSet name="java_Entity">
+			<outputdir>./src/{appPackage}</outputdir>
+			<encoding>UTF-8</encoding>
+			<templatePackage>/com/ibm/jp/awag2/template/java</templatePackage>
+			<templates>
+				<template name="Entity">
+					<active>true</active>
+					<dir>{outputdir}/entity</dir>
+					<fileName>{tableName}.java</fileName>
+					<allowOverWrite>true</allowOverWrite>
+				</template>
+				<template name="PK">
+					<active>true</active>
+					<dir>{outputdir}/entity</dir>
+					<fileName>{tableName}PK.java</fileName>
+					<allowOverWrite>true</allowOverWrite>
+				</template>
+				<template name="DAO">
+					<active>true</active>
+					<dir>{outputdir}/dao/impl</dir>
+					<fileName>{tableName}DAO.java</fileName>
+					<allowOverWrite>true</allowOverWrite>
+				</template>
+				<template name="CustomizeDAO">
+					<active>true</active>
+					<dir>{outputdir}/dao/impl</dir>
+					<fileName>{tableName}CustomizeDAO.java</fileName>
+					<allowOverWrite>false</allowOverWrite>
+				</template>
+			</templates>
+		</templateSet>
+
+ 		<templateSet name="screen">
+			<outputdir>./WebContent</outputdir>
+			<encoding>UTF-8</encoding>
+			<templatePackage>/com/ibm/jp/awag2/template/web</templatePackage>
+			<templates>
+				<template name="router.js">
+					<dir>{outputdir}/awag/{usecasename}</dir>
+					<fileName>{usecasename}Router.js</fileName>
+					<pattern>UC</pattern>
+					<allowOverWrite>true</allowOverWrite>
+				</template>
+				<template name="screen.html">
+					<dir>{outputdir}/awag/{usecasename}/template</dir>
+					<fileName>{screenName}.html</fileName>
+					<pattern>SC</pattern>
+					<allowOverWrite>true</allowOverWrite>
+				</template>
+				<template name="ctrl.js">
+					<dir>{outputdir}/awag/{usecasename}/controller</dir>
+					<fileName>{screenName}Ctrl.js</fileName>
+					<pattern>SC</pattern>
+					<allowOverWrite>true</allowOverWrite>
+				</template>
+				<template name="customInitialize.js">
+					<dir>{outputdir}/awag/{usecasename}/custom</dir>
+					<fileName>{screenName}Initialize.js</fileName>
+					<pattern>SC</pattern>
+					<allowOverWrite>false</allowOverWrite>
+				</template>
+				<template name="service.js">
+					<dir>{outputdir}/awag/{usecasename}/service</dir>
+					<fileName>{screenName}Service.js</fileName>
+					<pattern>SC</pattern>
+					<allowOverWrite>true</allowOverWrite>
+				</template>
+				<template name="serviceCustomLogic.js">
+					<dir>{outputdir}/awag/{usecasename}/custom</dir>
+					<fileName>{screenName}{eventName}ServiceCustomLogic.js</fileName>
+					<pattern>SV</pattern>
+					<allowOverWrite>false</allowOverWrite>
+				</template>
+				<template name="index.html">
+					<dir>{outputdir}</dir>
+					<fileName>index.html</fileName>
+					<pattern>1T</pattern>
+					<allowOverWrite>true</allowOverWrite>
+				</template>
+				<template name="app.js">
+					<dir>{outputdir}/awag</dir>
+					<fileName>app.js</fileName>
+					<pattern>1T</pattern>
+					<allowOverWrite>true</allowOverWrite>
+				</template>
+				<template name="namevalue.js">
+					<dir>{outputdir}/awag</dir>
+					<fileName>namevalue.js</fileName>
+					<pattern>1T</pattern>
+					<allowOverWrite>true</allowOverWrite>
+				</template>
+				<template name="common-service.js">
+					<dir>{outputdir}/awag</dir>
+					<fileName>service.js</fileName>
+					<pattern>1T</pattern>
+					<allowOverWrite>true</allowOverWrite>
+				</template>
+				<template name="home.html">
+					<dir>{outputdir}/awag</dir>
+					<fileName>home.html</fileName>
+					<pattern>1T</pattern>
+					<allowOverWrite>true</allowOverWrite>
+				</template>
+				<template name="app.css">
+					<dir>{outputdir}/awag</dir>
+					<fileName>app.css</fileName>
+					<pattern>1T</pattern>
+					<allowOverWrite>true</allowOverWrite>
+				</template>
+			</templates>
+		</templateSet>
+	</templateSets>
+</config>

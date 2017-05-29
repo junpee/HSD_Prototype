@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project basedir="." default="generate" name="AWAG">
+	<property name="GENERATOR_LIB_DIR" value="gen/lib" />
+	<property name="GENERATOR_TARGET_DIR" value="." />
+	<property name="AWAG_CONFIG_FILE" value="gen/AWAGConfig.xml" />
+	<property name="GENERATOR_FACTORY" value="com.ibm.jp.awag2.generator.AWAG2GeneratorFactory" />
+	<property name="GENERATOR_CONFIG_FILE" value="gen/HyperDevelopmentGeneratorConfig.xml" />
+	<property name="GENERATOR_RESOURCE_FILE" value="IntegratedRepositoryInterfaceData.xml" />
+	<path id="AWAG.classpath">
+		<pathelement location="bin" />
+		<pathelement location="${GENERATOR_LIB_DIR}/freemarker.jar" />
+		<pathelement location="${GENERATOR_LIB_DIR}/poi-3.14-20160307.jar" />
+		<pathelement location="${GENERATOR_LIB_DIR}/poi-excelant-3.14-20160307.jar" />
+		<pathelement location="${GENERATOR_LIB_DIR}/poi-ooxml-3.14-20160307.jar" />
+		<pathelement location="${GENERATOR_LIB_DIR}/poi-ooxml-schemas-3.14-20160307.jar" />
+		<pathelement location="${GENERATOR_LIB_DIR}/xmlbeans-2.6.0.jar" />
+	</path>
+
+	<target name="generate-init" description="Generatorの初期化処理。コード生成先ディレクトリ、コンパイル済みバイナリをクリーンアップする。">
+		<echo message="Starting generator init process." />
+		<delete verbose="true">
+			<fileset dir="${GENERATOR_TARGET_DIR}" includes="src/com/ibm/jp/awag2/common/**/*.java" />
+			<fileset dir="WebContent/WEB-INF/classes" includes="**/*" />
+			<fileset dir="bin" includes="**/*" />
+		</delete>
+	</target>
+
+	<target name="generate-build" description="Generatorをコンパイルする。">
+		<echo message="Starting generator build process." />
+		<javac srcdir="gen" destdir="bin" classpathref="AWAG.classpath" encoding="UTF-8" includeAntRuntime="false">
+			<exclude name="com/ibm/jp/awag*/template/**/*" />
+		</javac>
+		<copy todir="bin">
+			<fileset dir="gen" excludes="**/*.java" />
+		</copy>
+	</target>
+
+	<target name="generate-copy-commonfile" description="commonパッケージを配置する。">
+		<echo message="Starting copy app common files process." />
+		<copy verbose="true" includeemptydirs="false" todir="${GENERATOR_TARGET_DIR}/src/com/ibm/jp/awag2/common" overwrite="true">
+			<fileset dir="gen/com/ibm/jp/awag2/template/common" includes="**/*.java" />
+		</copy>
+	</target>
+
+	<target name="generate-exec" description="Generatorを実行する。">
+		<echo message="Starting generator execute process." />
+		<java classname="com.ibm.jp.awag.generator.AWAGMain" failonerror="true" fork="true">
+			<arg value="-OAWAG.configFilePath=${AWAG_CONFIG_FILE}" />
+			<arg value="-OAWAG.generatorFactory=${GENERATOR_FACTORY}" />
+			<arg value="-OAWAG2Generator.configFilePath=${GENERATOR_CONFIG_FILE}" />
+			<arg value="${GENERATOR_RESOURCE_FILE}" />
+			<classpath refid="AWAG.classpath" />
+		</java>
+	</target>
+
+	<target name="eclipse-reflesh" description="Eclipseプロジェクトを更新しBuildを実行する。">
+		<echo message="Starting Eclipse reflesh and build process." />
+		<eclipse.refreshLocal resource="" depth="full" />
+		<eclipse.incrementalBuild />
+	</target>
+
+	<target depends="generate-init,generate-build,generate-copy-commonfile,generate-exec,eclipse-reflesh" name="generate" />
+</project>

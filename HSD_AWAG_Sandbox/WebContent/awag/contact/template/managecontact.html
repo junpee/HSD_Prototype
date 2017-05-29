@@ -1,0 +1,104 @@
+<form name="form" action="#">
+  <div class="mdl-card  mdl-shadow--2dp myfitcard">
+    <div class="mdl-card__title mdl-card--border card-title">
+      <h2 class="mdl-card__title-text card-title-text"><i class="material-icons">web_asset</i> お客様コンタクト一覧</h2>
+    </div>
+    <div class="mdl-card__supporting-text mdl-card--border">
+      <div class="mdl-grid">
+        <!-- errors-->
+        <div class="error mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--top mdl-cell--12-col" ng-show="vm.error.details">
+          <div ng-repeat="detail in vm.error.details">
+            <i class="material-icons">warning</i> {{detail.message}} <span ng-show="detail.code.length>0">[</span>{{detail.code}}<span ng-show="detail.code.length>0">]</span> <br/>
+          </div>
+        </div>
+        <!-- 上部メッセージ static text -->
+        <div class="mdl-cell mdl-cell--top mdl-cell--12-col">
+          お客様コンタクト一覧を表示しています。
+        </div>
+        <!-- お客様番号 output -->
+        <div class="mdl-textfield mdl-textfield--floating-label mdl-cell mdl-cell--top mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone is-upgraded" data-upgraded=",MaterialTextfield">
+          <span class="input-floating-label">お客様番号...</span>
+          <span id="customerid" class="mdl-textfield__output">{{vm.model.customerid}}</span>
+        </div>
+        <!-- お客様名（英字） output -->
+        <div class="mdl-textfield mdl-textfield--floating-label mdl-cell mdl-cell--top mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone is-upgraded" data-upgraded=",MaterialTextfield">
+          <span class="input-floating-label">お客様名（英字）...</span>
+          <span id="nameen" class="mdl-textfield__output">{{vm.model.nameen}}</span>
+        </div>
+        <!-- お客様名（全角） output -->
+        <div class="mdl-textfield mdl-textfield--floating-label mdl-cell mdl-cell--top mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone is-upgraded" data-upgraded=",MaterialTextfield">
+          <span class="input-floating-label">お客様名（全角）...</span>
+          <span id="name" class="mdl-textfield__output">{{vm.model.name}}</span>
+        </div>
+        <!-- 担当者名 output -->
+        <div class="mdl-textfield mdl-textfield--floating-label mdl-cell mdl-cell--top mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone is-upgraded" data-upgraded=",MaterialTextfield">
+          <span class="input-floating-label">担当者名...</span>
+          <span id="staff.name" class="mdl-textfield__output">{{vm.model.staff.name}}</span>
+        </div>
+      </div>
+    </div>
+    <div class="mdl-card__actions mdl-card--border">
+    </div>
+  </div>
+
+  <div class="mdl-card  mdl-shadow--2dp myfitcard">
+    <div class="mdl-card__title mdl-card--border card-title">
+      <h2 class="mdl-card__title-text card-title-text"><i class="material-icons">web_asset</i> お客様コンタクト一覧 一覧</h2>
+    </div>
+
+    <div class="mdl-card__supporting-text mdl-card--border">
+      <div class="x-table">
+          <table class="mdl-data-table mdl-shadow--2dp">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th class="mdl-data-table__cell--non-numeric" ng-click="vm.sortContacts('contactid')" ng-class="{'mdl-data-table__header--sorted-descending': vm.sortKeyContacts==='-contactid', 'mdl-data-table__header--sorted-ascending': vm.sortKeyContacts==='+contactid'}">履歴番号</th>
+                <th class="mdl-data-table__cell--non-numeric" ng-click="vm.sortContacts('inchargeid')" ng-class="{'mdl-data-table__header--sorted-descending': vm.sortKeyContacts==='-inchargeid', 'mdl-data-table__header--sorted-ascending': vm.sortKeyContacts==='+inchargeid'}">担当ID</th>
+                <th class="mdl-data-table__cell--non-numeric" ng-click="vm.sortContacts('description')" ng-class="{'mdl-data-table__header--sorted-descending': vm.sortKeyContacts==='-description', 'mdl-data-table__header--sorted-ascending': vm.sortKeyContacts==='+description'}">内容</th>
+                <th class="mdl-data-table__cell--non-numeric" ng-click="vm.sortContacts('salescd')" ng-class="{'mdl-data-table__header--sorted-descending': vm.sortKeyContacts==='-salescd', 'mdl-data-table__header--sorted-ascending': vm.sortKeyContacts==='+salescd'}">セールスコード</th>
+                <th class="mdl-data-table__cell--non-numeric" ng-click="vm.sortContacts('ozz')" ng-class="{'mdl-data-table__header--sorted-descending': vm.sortKeyContacts==='-ozz', 'mdl-data-table__header--sorted-ascending': vm.sortKeyContacts==='+ozz'}">オッズ</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="item in vm.model.contacts | limitTo: vm.pager.len :vm.pager.start">
+                <td>
+                  <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="selectedKey{{$index}}">
+                    <input class="mdl-radio__button" id="selectedKey{{$index}}" name="selectedKey" type="radio" ng-value="item" ng-model="vm.selectedKey" ng-click="vm.awagSelect()" />
+                  </label>
+                </td>
+                <td class="mdl-data-table__cell--non-numeric">{{item.contactid}}</td>
+                <td class="mdl-data-table__cell--non-numeric">{{item.inchargeid}}</td>
+                <td class="mdl-data-table__cell--non-numeric">{{item.description}}</td>
+                <td class="mdl-data-table__cell--non-numeric">{{item.salescd}}</td>
+                <td class="mdl-data-table__cell--non-numeric">{{item.ozz}}</td>
+              </tr>
+            </tbody>
+          </table>
+      </div>
+      <span ng-repeat="page in vm.pager.pagerList">
+        <a class="mdl-navigation__link" ng-click="vm.paginate(vm.pager, page )" ng-if="vm.pager.pagenum!=page" href="javascript:void(0)"> [{{page+1}}] </a>
+        <span class="mdl-navigation__link" ng-click="vm.paginate(vm.pager, page )" ng-if="vm.pager.pagenum==page"> {{page+1}} </span>
+      </span>Page
+    </div>
+
+    <div class="mdl-card__actions mdl-card--border">
+      <!-- Raised button with ripple -->
+      <button type="button" id="showDetail" class="white-space mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" ng-click="vm.showDetail()" ng-disabled="!vm.modelSelected">
+        詳細確認
+      </button>
+      <!-- Raised button with ripple -->
+      <button type="button" id="updateContact" class="white-space mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" ng-click="vm.updateContact()" ng-disabled="!vm.modelSelected">
+        コンタクト履歴更新
+      </button>
+      <!-- Raised button with ripple -->
+      <button type="button" id="deleteContact" class="white-space mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" ng-click="vm.deleteContact()" ng-disabled="!vm.modelSelected">
+        コンタクト履歴削除
+      </button>
+      <!-- Raised button with ripple -->
+      <button type="button" id="add" class="white-space mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" ng-click="vm.add()">
+        コンタクト履歴追加
+      </button>
+    </div>
+  </div>
+
+</form>

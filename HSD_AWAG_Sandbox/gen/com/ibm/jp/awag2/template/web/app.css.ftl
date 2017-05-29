@@ -1,0 +1,79 @@
+<#--
+Automated web application generator
+
+Licensed Materials - Property of IBM
+"Restricted Materials of IBM"
+IPSC : 6949-63S
+(C) Copyright IBM Japan, Ltd. 2016 All Rights Reserved.
+(C) Copyright IBM Corp. 2016 All Rights Reserved.
+US Government Users Restricted Rights -
+Use, duplication or disclosure restricted
+by GSA ADP Schedule Contract with IBM Corp.
+ -->
+ html, body {
+   font-family: -apple-system, BlinkMacSystemFont, YuGothic, "Meiryo", "Helvetica", sans-serif !important;
+   background-color: #eee;
+ }
+.input-floating-label {
+  color: rgb(63, 81, 181);
+  font-size: 12px;
+  top: 4px;
+  position: absolute;
+}
+.content-grid {
+  max-width: 960px;
+}
+.white-space {
+  margin: 8px;
+}
+.x-table {
+  overFlow-x: auto;
+}
+.full-width {
+  width: 100%;
+}
+.content-body {
+  margin-left: 24px;
+}
+.error {
+  color: red;
+}
+.myfitcard {
+  margin: 12px;
+  width: 94%;
+}
+.mdl-textfield__output {
+  border: none;
+  border-bottom: 1px solid white;
+  display: block;
+  font-size: 16px;
+  font-family: "Helvetica","Arial",sans-serif;
+  margin: 0;
+  padding: 4px 0;
+  width: 100%;
+  background: 0 0;
+  text-align: left;
+  color: inherit;
+  height: 19px;
+}
+.height28 {
+  height: 28px;
+}
+.card-title {
+  background-color: #e3f2fd;
+  color: rgba(0,0,0,.54);;
+}
+.card-title-text {
+  font-size: 16px;
+}
+.awag-textfield__error {
+  color: #d50000;
+  position: absolute;
+  font-size: 12px;
+  margin-top: 3px;
+  display: block;
+}
+.align-bottom {
+  bottom: 20px;
+  position: absolute;
+}

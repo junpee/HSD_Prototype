@@ -1,0 +1,112 @@
+<form name="form" action="#">
+  <div class="mdl-card  mdl-shadow--2dp myfitcard">
+    <div class="mdl-card__title mdl-card--border card-title">
+      <h2 class="mdl-card__title-text card-title-text"><i class="material-icons">web_asset</i> 登録</h2>
+    </div>
+    <div class="mdl-card__supporting-text mdl-card--border">
+      <div class="mdl-grid">
+        <!-- errors-->
+        <div class="error mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--top mdl-cell--12-col" ng-show="vm.error.details">
+          <div ng-repeat="detail in vm.error.details">
+            <i class="material-icons">warning</i> {{detail.message}} <span ng-show="detail.code.length>0">[</span>{{detail.code}}<span ng-show="detail.code.length>0">]</span> <br/>
+          </div>
+        </div>
+        <!-- 上部メッセージ static text -->
+        <div class="mdl-cell mdl-cell--top mdl-cell--12-col">
+          お客様情報を登録してください。
+        </div>
+        <!-- お客様番号 Textfield with Floating Label -->
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--top mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone">
+          <label class="mdl-textfield__label" for="customerid">お客様番号 *</label>
+		  <input class="mdl-textfield__input" id="customerid" name="customerid" type="text" pattern="[0-9]{8}" ng-model="vm.model.customerid" required />
+          <span class="mdl-textfield__error" ng-show="form.customerid.$error.pattern">半角数値8文字で入力してください。</span>
+        </div>
+        <!-- お客様名（英字） Textfield with Floating Label -->
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--top mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone">
+          <label class="mdl-textfield__label" for="nameen">お客様名（英字） *</label>
+		  <input class="mdl-textfield__input" id="nameen" name="nameen" type="text" pattern="[\x20-\x7E]{2,30}" ng-model="vm.model.nameen" required />
+          <span class="mdl-textfield__error" ng-show="form.nameen.$error.pattern">半角2文字以上30文字以下で入力してください。</span>
+        </div>
+        <!-- お客様名（全角） Textfield with Floating Label -->
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--top mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone">
+          <label class="mdl-textfield__label" for="name">お客様名（全角） *</label>
+		  <input class="mdl-textfield__input" id="name" name="name" type="text" pattern="[^\x20-\x7E]{2,10}" ng-model="vm.model.name" required />
+          <span class="mdl-textfield__error" ng-show="form.name.$error.pattern">全角2文字以上10文字以下で入力してください。</span>
+        </div>
+        <!-- space-->
+        <div class="mdl-textfield mdl-cell mdl-cell--top mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
+        <!-- 担当ID Textfield with Floating Label -->
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--top mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone">
+          <label class="mdl-textfield__label" for="inchargeid">担当ID *</label>
+		  <input class="mdl-textfield__input" id="inchargeid" name="inchargeid" type="text" pattern="[0-9a-zA-Z]{8}" ng-model="vm.model.inchargeid" required />
+          <span class="mdl-textfield__error" ng-show="form.inchargeid.$error.pattern">半角英数8文字で入力してください。</span>
+        </div>
+        <!-- 登録日 Textfield with Floating Label -->
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--top mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone">
+          <label class="mdl-textfield__label" for="registereddate">登録日 ...</label>
+		  <input class="mdl-textfield__input" id="registereddate" name="registereddate" type="text" pattern="\d{4}-\d{2}-\d{2}" ng-model="vm.model.registereddate"  />
+          <span class="mdl-textfield__error" ng-show="form.registereddate.$error.pattern">日付形式（yyyy-mm-dd）で入力してください。</span>
+        </div>
+        <!-- お客様名（かな） Textfield with Floating Label -->
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--top mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone">
+          <label class="mdl-textfield__label" for="hiragana">お客様名（かな） ...</label>
+		  <input class="mdl-textfield__input" id="hiragana" name="hiragana" type="text" pattern="[\u3041-\u309F]{0,10}" ng-model="vm.model.hiragana"  />
+          <span class="mdl-textfield__error" ng-show="form.hiragana.$error.pattern">ひらがな10文字以下で入力してください。</span>
+        </div>
+        <!-- お客様名（カナ） Textfield with Floating Label -->
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--top mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone">
+          <label class="mdl-textfield__label" for="katakana">お客様名（カナ） ...</label>
+		  <input class="mdl-textfield__input" id="katakana" name="katakana" type="text" pattern="[\u30A1-\u30FE]{0,10}" ng-model="vm.model.katakana"  />
+          <span class="mdl-textfield__error" ng-show="form.katakana.$error.pattern">全角カタカナ10文字以下で入力してください。</span>
+        </div>
+        <!-- 概要 Textfield with Floating Label -->
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--top mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone">
+          <label class="mdl-textfield__label" for="description">概要 ...</label>
+		  <input class="mdl-textfield__input" id="description" name="description" type="text" pattern=".{0,30}" ng-model="vm.model.description"  />
+          <span class="mdl-textfield__error" ng-show="form.description.$error.pattern">30文字以下で入力してください。</span>
+        </div>
+        <!-- ISINコード Textfield with Floating Label -->
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--top mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone">
+          <label class="mdl-textfield__label" for="isin">ISINコード ...</label>
+		  <input class="mdl-textfield__input" id="isin" name="isin" type="text" pattern="[0-9a-zA-Z]{12}" ng-model="vm.model.isin"  />
+          <span class="mdl-textfield__error" ng-show="form.isin.$error.pattern">半角英数12文字で入力してください。</span>
+        </div>
+        <!-- 法人番号 Textfield with Floating Label -->
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--top mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone">
+          <label class="mdl-textfield__label" for="houjinno">法人番号 ...</label>
+		  <input class="mdl-textfield__input" id="houjinno" name="houjinno" type="text" pattern="[0-9]{13}" ng-model="vm.model.houjinno"  />
+          <span class="mdl-textfield__error" ng-show="form.houjinno.$error.pattern">半角数値13文字で入力してください。</span>
+        </div>
+        <!-- お客様ランク Radio-->
+        <div class="mdl-textfield mdl-cell mdl-cell--top mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone">
+          <span class="input-floating-label">お客様ランク ...</span>
+          <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="rank-{{opt.value}}" ng-repeat="opt in vm.rankOpts">
+            <input class="mdl-radio__button" id="rank-{{opt.value}}" name="rank" type="radio" value="{{opt.value}}" ng-model="vm.model.rank"  />
+            <span class="mdl-radio__label">{{opt.name}}&nbsp;&nbsp;</span>
+          </label>
+        </div>
+        <!-- お客様区分1 Pulldown-->
+        <div class="mdl-textfield mdl-cell mdl-cell--top mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone">
+          <span class="input-floating-label">お客様区分1 ...</span>
+          <select class="mdl-textfield__input height28" id="custclass1" ng-model="vm.model.custclass1"  >
+            <option ng-repeat="opt in vm.class1Opts" value="{{opt.value}}">{{opt.name}}</option>
+          </select>
+        </div>
+        <!-- お客様区分2 Pulldown-->
+        <div class="mdl-textfield mdl-cell mdl-cell--top mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone">
+          <span class="input-floating-label">お客様区分2 ...</span>
+          <select class="mdl-textfield__input height28" id="custclass2" ng-model="vm.model.custclass2"  >
+            <option ng-repeat="opt in vm.class2Opts" value="{{opt.value}}">{{opt.name}}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="mdl-card__actions mdl-card--border">
+      <!-- Raised button with ripple -->
+      <button type="button" id="confirm" class="white-space mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" ng-click="vm.confirm()" ng-disabled="form.$invalid">
+        登録確認
+      </button>
+    </div>
+  </div>
+
+</form>

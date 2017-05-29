@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<dataLoaderClassName>com.ibm.jp.awag2.generator.AWAG2InputDataLoader</dataLoaderClassName>
+	<xlsFilePath>AWAG_ResourceDefinition.xlsx</xlsFilePath>
+<!-- 	<xlsFilePath>AWAG2_JPA_Definition_170123a.xlsx</xlsFilePath>
+  		<xlsFilePath>AWAG2_SPA_Definition_170125.xlsx</xlsFilePath>
+  		-->
+
+	<templateSets>
+		<templateSet name="conf">
+ 			<commonfile>true</commonfile>
+			<outputdir>./WebContent/WEB-INF</outputdir>
+			<encoding>UTF-8</encoding>
+			<templatePackage>/com/ibm/jp/awag2/template/conf</templatePackage>
+			<templates>
+				<template name="persistencexml">
+					<active>true</active>
+					<dir>./src/META-INF</dir>
+					<fileName>persistence.xml</fileName>
+					<allowOverWrite>true</allowOverWrite>
+				</template>
+				<template name="beansxml">
+					<active>true</active>
+					<dir>{outputdir}</dir>
+					<fileName>beans.xml</fileName>
+					<allowOverWrite>true</allowOverWrite>
+				</template>
+				<template name="AWAGCommonMessages">
+					<active>true</active>
+					<dir>{outputdir}/conf</dir>
+					<fileName>AWAGCommonMessages.properties</fileName>
+					<allowOverWrite>true</allowOverWrite>
+				</template>
+				<template name="AWAGCommonMessages_en">
+					<active>true</active>
+					<dir>{outputdir}/conf</dir>
+					<fileName>AWAGCommonMessages_en.properties</fileName>
+					<allowOverWrite>true</allowOverWrite>
+				</template>
+				<template name="AWAGCommonMessages_ja">
+					<active>true</active>
+					<dir>{outputdir}/conf</dir>
+					<fileName>AWAGCommonMessages_ja.properties</fileName>
+					<allowOverWrite>true</allowOverWrite>
+				</template>
+				<template name="log4j2xml">
+					<active>true</active>
+					<dir>{outputdir}/conf</dir>
+					<fileName>log4j2.xml</fileName>
+					<allowOverWrite>true</allowOverWrite>
+				</template>
+				<template name="ValidationMessages">
+						<active>true</active>
+					<dir>{outputdir}/conf</dir>
+					<fileName>ValidationMessages.properties</fileName>
+					<allowOverWrite>true</allowOverWrite>
+				</template>
+				<template name="webxml">
+					<active>true</active>
+					<dir>{outputdir}</dir>
+					<fileName>web.xml</fileName>
+					<allowOverWrite>true</allowOverWrite>
+				</template>
+			</templates>
+		</templateSet>
+		<templateSet name="java_Resource">
+			<printTimeStampToOutputFile>true</printTimeStampToOutputFile>
+			<outputdir>./src/{appPackage}</outputdir>
+			<encoding>UTF-8</encoding>
+			<templatePackage>/com/ibm/jp/awag2/template/java</templatePackage>
+			<templates>
+				<template name="InputDTO">
+					<active>true</active>
+					<dir>{outputdir}/dto</dir>
+					<fileName>{id}InputDTO.java</fileName>
+					<allowOverWrite>true</allowOverWrite>
+				</template>
+				<template name="OutputDTO">
+					<active>true</active>
+					<dir>{outputdir}/dto</dir>
+					<fileName>{id}OutputDTO.java</fileName>
+					<allowOverWrite>true</allowOverWrite>
+				</template>
+				<template name="ResourceManager">
+					<active>true</active>
+					<dir>{outputdir}/resource</dir>
+					<fileName>{id}ResourceManager.java</fileName>
+					<allowOverWrite>true</allowOverWrite>
+				</template>
+				<template name="Resource">
+					<active>true</active>
+					<dir>{outputdir}/resource/impl</dir>
+					<fileName>{id}Resource.java</fileName>
+					<allowOverWrite>false</allowOverWrite>
+				</template>
+				<template name="ServiceCustomize">
+					<active>true</active>
+					<dir>{outputdir}/logic/impl</dir>
+					<fileName>{id}ServiceCustomize.java</fileName>
+					<allowOverWrite>false</allowOverWrite>
+				</template>
+				<template name="Service">
+					<active>true</active>
+					<dir>{outputdir}/logic/impl</dir>
+					<fileName>{id}Service.java</fileName>
+					<allowOverWrite>true</allowOverWrite>
+				</template>
+			</templates>
+		</templateSet>
+		<templateSet name="java_Entity">
+			<outputdir>./src/{appPackage}</outputdir>
+			<encoding>UTF-8</encoding>
+			<templatePackage>/com/ibm/jp/awag2/template/java</templatePackage>
+			<templates>
+				<template name="Entity">
+					<active>true</active>
+					<dir>{outputdir}/entity</dir>
+					<fileName>{tableName}.java</fileName>
+					<allowOverWrite>true</allowOverWrite>
+				</template>
+				<template name="PK">
+					<active>true</active>
+					<dir>{outputdir}/entity</dir>
+					<fileName>{tableName}PK.java</fileName>
+					<allowOverWrite>true</allowOverWrite>
+				</template>
+				<template name="DAO">
+					<active>true</active>
+					<dir>{outputdir}/dao/impl</dir>
+					<fileName>{tableName}DAO.java</fileName>
+					<allowOverWrite>true</allowOverWrite>
+				</template>
+				<template name="CustomizeDAO">
+					<active>true</active>
+					<dir>{outputdir}/dao/impl</dir>
+					<fileName>{tableName}CustomizeDAO.java</fileName>
+					<allowOverWrite>false</allowOverWrite>
+				</template>
+			</templates>
+		</templateSet>
+
+ 		<templateSet name="screen">
+			<outputdir>./WebContent</outputdir>
+			<encoding>UTF-8</encoding>
+			<templatePackage>/com/ibm/jp/awag2/template/web</templatePackage>
+			<templates>
+				<template name="router.js">
+					<dir>{outputdir}/awag/{usecasename}</dir>
+					<fileName>{usecasename}Router.js</fileName>
+					<pattern>UC</pattern>
+					<allowOverWrite>true</allowOverWrite>
+				</template>
+				<template name="screen.html">
+					<dir>{outputdir}/awag/{usecasename}/template</dir>
+					<fileName>{screenName}.html</fileName>
+					<pattern>SC</pattern>
+					<allowOverWrite>true</allowOverWrite>
+				</template>
+				<template name="ctrl.js">
+					<dir>{outputdir}/awag/{usecasename}/controller</dir>
+					<fileName>{screenName}Ctrl.js</fileName>
+					<pattern>SC</pattern>
+					<allowOverWrite>true</allowOverWrite>
+				</template>
+				<template name="customInitialize.js">
+					<dir>{outputdir}/awag/{usecasename}/custom</dir>
+					<fileName>{screenName}Initialize.js</fileName>
+					<pattern>SC</pattern>
+					<allowOverWrite>false</allowOverWrite>
+				</template>
+				<template name="service.js">
+					<dir>{outputdir}/awag/{usecasename}/service</dir>
+					<fileName>{screenName}Service.js</fileName>
+					<pattern>SC</pattern>
+					<allowOverWrite>true</allowOverWrite>
+				</template>
+				<template name="serviceCustomLogic.js">
+					<dir>{outputdir}/awag/{usecasename}/custom</dir>
+					<fileName>{screenName}{eventName}ServiceCustomLogic.js</fileName>
+					<pattern>SV</pattern>
+					<allowOverWrite>false</allowOverWrite>
+				</template>
+				<template name="index.html">
+					<dir>{outputdir}</dir>
+					<fileName>index.html</fileName>
+					<pattern>1T</pattern>
+					<allowOverWrite>true</allowOverWrite>
+				</template>
+				<template name="app.js">
+					<dir>{outputdir}/awag</dir>
+					<fileName>app.js</fileName>
+					<pattern>1T</pattern>
+					<allowOverWrite>true</allowOverWrite>
+				</template>
+				<template name="namevalue.js">
+					<dir>{outputdir}/awag</dir>
+					<fileName>namevalue.js</fileName>
+					<pattern>1T</pattern>
+					<allowOverWrite>true</allowOverWrite>
+				</template>
+				<template name="common-service.js">
+					<dir>{outputdir}/awag</dir>
+					<fileName>service.js</fileName>
+					<pattern>1T</pattern>
+					<allowOverWrite>true</allowOverWrite>
+				</template>
+				<template name="home.html">
+					<dir>{outputdir}/awag</dir>
+					<fileName>home.html</fileName>
+					<pattern>1T</pattern>
+					<allowOverWrite>true</allowOverWrite>
+				</template>
+				<template name="app.css">
+					<dir>{outputdir}/awag</dir>
+					<fileName>app.css</fileName>
+					<pattern>1T</pattern>
+					<allowOverWrite>true</allowOverWrite>
+				</template>
+			</templates>
+		</templateSet>
+	</templateSets>
+
+	<definitionSheetMappings>
+		<!--  System  -->
+		<definitionSheetMapping name="system_version">B1</definitionSheetMapping>
+
+		<definitionSheetMapping name="sheetType">A1</definitionSheetMapping>
+
+		<!-- SPA定義項目 -->
+		<definitionSheetMapping name="codelist_id">A3</definitionSheetMapping>
+
+		<definitionSheetMapping name="appName">C3</definitionSheetMapping>
+		<definitionSheetMapping name="usecaseDisplayName">C4</definitionSheetMapping>
+		<definitionSheetMapping name="screenNameLocal">C5</definitionSheetMapping>
+		<definitionSheetMapping name="screenType">C6</definitionSheetMapping>
+		<definitionSheetMapping name="screen_options">C8</definitionSheetMapping>
+		<definitionSheetMapping name="designType">G3</definitionSheetMapping>
+		<definitionSheetMapping name="usecaseName">G4</definitionSheetMapping>
+		<definitionSheetMapping name="screenName">G5</definitionSheetMapping>
+		<definitionSheetMapping name="col">G6</definitionSheetMapping>
+		<definitionSheetMapping name="isMenuTop">C7</definitionSheetMapping>
+
+		<definitionSheetMapping name="column_groupName">B13</definitionSheetMapping>
+		<definitionSheetMapping name="column_DisplayName">C13</definitionSheetMapping>
+		<definitionSheetMapping name="column_fieldName">D13</definitionSheetMapping>
+		<definitionSheetMapping name="column_eventDisplayName">E13</definitionSheetMapping>
+		<definitionSheetMapping name="column_eventName">F13</definitionSheetMapping>
+		<definitionSheetMapping name="column_htmlType">G13</definitionSheetMapping>
+		<definitionSheetMapping name="column_isReadonly">H13</definitionSheetMapping>
+		<definitionSheetMapping name="column_codeListId">I13</definitionSheetMapping>
+		<definitionSheetMapping name="column_isRequired">J13</definitionSheetMapping>
+		<definitionSheetMapping name="column_formatType">K13</definitionSheetMapping>
+		<definitionSheetMapping name="column_maxLength">L13</definitionSheetMapping>
+		<definitionSheetMapping name="column_minLength">M13</definitionSheetMapping>
+
+		<definitionSheetMapping name="column_isEvent">N13</definitionSheetMapping>
+		<definitionSheetMapping name="column_nextScreenDisplayName">O13</definitionSheetMapping>
+		<definitionSheetMapping name="column_nextScreen">P13</definitionSheetMapping>
+		<definitionSheetMapping name="column_eventFireType">Q13</definitionSheetMapping>
+		<definitionSheetMapping name="column_apiType">R13</definitionSheetMapping>
+		<definitionSheetMapping name="column_apiPath">S13</definitionSheetMapping>
+
+		<definitionSheetMapping name="column_value">T13</definitionSheetMapping>
+		<definitionSheetMapping name="column_screen_options">U13</definitionSheetMapping>
+
+		<!-- API定義項目 -->
+
+		<definitionSheetMapping name="javaPackage">C3</definitionSheetMapping>
+		<definitionSheetMapping name="apiName">C4</definitionSheetMapping>
+		<definitionSheetMapping name="apiNameLocal">C5</definitionSheetMapping>
+		<definitionSheetMapping name="apiPath">C6</definitionSheetMapping>
+		<definitionSheetMapping name="apiMethod">C7</definitionSheetMapping>
+		<definitionSheetMapping name="apiType">C8</definitionSheetMapping>
+		<definitionSheetMapping name="description">C9</definitionSheetMapping>
+		<definitionSheetMapping name="api_options">C10</definitionSheetMapping>
+
+		<definitionSheetMapping name="column_itemNameLocal">B16</definitionSheetMapping>
+		<definitionSheetMapping name="column_itemName">C16</definitionSheetMapping>
+		<definitionSheetMapping name="column_multiple">D16</definitionSheetMapping>
+		<definitionSheetMapping name="column_itemNameLocalSecond">E16</definitionSheetMapping>
+		<definitionSheetMapping name="column_itemNameSecond">F16</definitionSheetMapping>
+		<definitionSheetMapping name="column_multipleSecond">G16</definitionSheetMapping>
+		<definitionSheetMapping name="column_itemNameLocalThird">H16</definitionSheetMapping>
+		<definitionSheetMapping name="column_itemNameThird">I16</definitionSheetMapping>
+		<definitionSheetMapping name="column_IO">J16</definitionSheetMapping>
+
+		<definitionSheetMapping name="column_entityName1">K16</definitionSheetMapping>
+		<definitionSheetMapping name="column_fieldName1_or_entityName2">L16</definitionSheetMapping>
+		<definitionSheetMapping name="column_fieldName2_or_entityName3">M16</definitionSheetMapping>
+		<definitionSheetMapping name="column_fieldName3">N16</definitionSheetMapping>
+		<definitionSheetMapping name="column_api_isNotNull">O16</definitionSheetMapping>
+		<definitionSheetMapping name="column_api_formatType">P16</definitionSheetMapping>
+		<definitionSheetMapping name="column_api_maxLength">Q16</definitionSheetMapping>
+		<definitionSheetMapping name="column_api_minLength">R16</definitionSheetMapping>
+		<definitionSheetMapping name="column_api_options">S16</definitionSheetMapping>
+
+  		<!-- JPA定義項目 -->
+		<definitionSheetMapping name="schemaName">D3</definitionSheetMapping>
+		<definitionSheetMapping name="tableNameLocal">D4</definitionSheetMapping>
+		<definitionSheetMapping name="tableName">D5</definitionSheetMapping>
+		<definitionSheetMapping name="packageName">D6</definitionSheetMapping>
+		<definitionSheetMapping name="maxResult">D7</definitionSheetMapping>
+		<definitionSheetMapping name="table_options">D8</definitionSheetMapping>
+		<definitionSheetMapping name="column_isPk">B13</definitionSheetMapping>
+		<definitionSheetMapping name="column_name">C13</definitionSheetMapping>
+		<definitionSheetMapping name="column_columnName">D13</definitionSheetMapping>
+		<definitionSheetMapping name="column_isNotNull">E13</definitionSheetMapping>
+		<definitionSheetMapping name="column_dataType">F13</definitionSheetMapping>
+		<definitionSheetMapping name="column_table_length">G13</definitionSheetMapping>
+		<definitionSheetMapping name="column_fraction">H13</definitionSheetMapping>
+		<definitionSheetMapping name="column_isVersion">I13</definitionSheetMapping>
+		<definitionSheetMapping name="column_table_options">J13</definitionSheetMapping>
+
+		<definitionSheetMapping name="relation_dependentResource">M13</definitionSheetMapping>
+		<definitionSheetMapping name="relation_pattern">N13</definitionSheetMapping>
+		<definitionSheetMapping name="relation_joinKeyParent">O13</definitionSheetMapping>
+		<definitionSheetMapping name="relation_joinKeyDependence">P13</definitionSheetMapping>
+		
+  		<!-- AWAG1定義項目 -->
+		<definitionSheetMapping name="AWAG1_screenNameLocal">D3</definitionSheetMapping>
+		<definitionSheetMapping name="AWAG1_screenName">D4</definitionSheetMapping>
+		<definitionSheetMapping name="AWAG1_packageName">D5</definitionSheetMapping>
+		<definitionSheetMapping name="AWAG1_maxResult">D6</definitionSheetMapping>
+		<definitionSheetMapping name="AWAG1_webCodeGen">D7</definitionSheetMapping>
+		<definitionSheetMapping name="AWAG1_schemaName">D8</definitionSheetMapping>
+		<definitionSheetMapping name="AWAG1_tableNameLocal">D9</definitionSheetMapping>
+		<definitionSheetMapping name="AWAG1_tableName">D10</definitionSheetMapping>
+
+		<definitionSheetMapping name="AWAG1_relation_dependentResource">I4</definitionSheetMapping>
+		<definitionSheetMapping name="AWAG1_relation_pattern">J4</definitionSheetMapping>
+		<definitionSheetMapping name="AWAG1_relation_joinKeyParent">K4</definitionSheetMapping>
+		<definitionSheetMapping name="AWAG1_relation_joinKeyDependence">L4</definitionSheetMapping>
+		<definitionSheetMapping name="AWAG1_resource_options">U4</definitionSheetMapping>
+
+		<definitionSheetMapping name="AWAG1_column_isPk">B16</definitionSheetMapping>
+		<definitionSheetMapping name="AWAG1_column_name">C16</definitionSheetMapping>
+		<definitionSheetMapping name="AWAG1_column_columnName">D16</definitionSheetMapping>
+		<definitionSheetMapping name="AWAG1_column_isAllowedNull">E16</definitionSheetMapping>
+		<definitionSheetMapping name="AWAG1_column_dataType">F16</definitionSheetMapping>
+		<definitionSheetMapping name="AWAG1_column_table_length">G16</definitionSheetMapping>
+		<definitionSheetMapping name="AWAG1_column_fraction">H16</definitionSheetMapping>
+		<definitionSheetMapping name="AWAG1_column_displayName">I16</definitionSheetMapping>
+		<definitionSheetMapping name="AWAG1_column_fieldName">J16</definitionSheetMapping>
+		<definitionSheetMapping name="AWAG1_column_htmlType">K16</definitionSheetMapping>
+		<definitionSheetMapping name="AWAG1_column_codeListId">L16</definitionSheetMapping>
+		<definitionSheetMapping name="AWAG1_column_formatValidationRule">M16</definitionSheetMapping>
+		<definitionSheetMapping name="AWAG1_column_maxLength">N16</definitionSheetMapping>
+		<definitionSheetMapping name="AWAG1_column_minLength">O16</definitionSheetMapping>
+		<definitionSheetMapping name="AWAG1_column_length">P16</definitionSheetMapping>
+		<definitionSheetMapping name="AWAG1_column_isSerchParam">Q16</definitionSheetMapping>
+		<definitionSheetMapping name="AWAG1_conditionOperator">R16</definitionSheetMapping>
+		<definitionSheetMapping name="AWAG1_column_isVersion">S16</definitionSheetMapping>
+		<definitionSheetMapping name="AWAG1_column_displayOrder">T16</definitionSheetMapping>
+		<definitionSheetMapping name="AWAG1_column_options">U16</definitionSheetMapping>		
+
+	</definitionSheetMappings>
+</config>

@@ -1,0 +1,117 @@
+<form name="form" action="#">
+  <div class="mdl-card  mdl-shadow--2dp myfitcard">
+    <div class="mdl-card__title mdl-card--border card-title">
+      <h2 class="mdl-card__title-text card-title-text"><i class="material-icons">web_asset</i> コンタクトお客様検索</h2>
+    </div>
+    <div class="mdl-card__supporting-text mdl-card--border">
+      <div class="mdl-grid">
+        <!-- errors-->
+        <div class="error mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--top mdl-cell--12-col" ng-show="vm.error.details">
+          <div ng-repeat="detail in vm.error.details">
+            <i class="material-icons">warning</i> {{detail.message}} <span ng-show="detail.code.length>0">[</span>{{detail.code}}<span ng-show="detail.code.length>0">]</span> <br/>
+          </div>
+        </div>
+        <!-- 上部メッセージ static text -->
+        <div class="mdl-cell mdl-cell--top mdl-cell--12-col">
+          お客様検索条件を指定してください。
+        </div>
+        <!-- お客様番号 Textfield with Floating Label -->
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--top mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone">
+          <label class="mdl-textfield__label" for="customerid">お客様番号 ...</label>
+		  <input class="mdl-textfield__input" id="customerid" name="customerid" type="text" pattern="[0-9]{8}" ng-model="vm.model.search.customerid"  />
+          <span class="mdl-textfield__error" ng-show="form.customerid.$error.pattern">半角数値8文字で入力してください。</span>
+        </div>
+        <!-- お客様名（英字） Textfield with Floating Label -->
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--top mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone">
+          <label class="mdl-textfield__label" for="nameen">お客様名（英字） ...</label>
+		  <input class="mdl-textfield__input" id="nameen" name="nameen" type="text" pattern="[\x20-\x7E]{2,30}" ng-model="vm.model.search.nameen"  />
+          <span class="mdl-textfield__error" ng-show="form.nameen.$error.pattern">半角2文字以上30文字以下で入力してください。</span>
+        </div>
+        <!-- お客様名（全角） Textfield with Floating Label -->
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--top mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone">
+          <label class="mdl-textfield__label" for="name">お客様名（全角） ...</label>
+		  <input class="mdl-textfield__input" id="name" name="name" type="text" pattern="[^\x20-\x7E]{2,10}" ng-model="vm.model.search.name"  />
+          <span class="mdl-textfield__error" ng-show="form.name.$error.pattern">全角2文字以上10文字以下で入力してください。</span>
+        </div>
+        <!-- 担当ID Textfield with Floating Label -->
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--top mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone">
+          <label class="mdl-textfield__label" for="inchargeid">担当ID ...</label>
+		  <input class="mdl-textfield__input" id="inchargeid" name="inchargeid" type="text" pattern="[0-9a-zA-Z]{8}" ng-model="vm.model.search.inchargeid"  />
+          <span class="mdl-textfield__error" ng-show="form.inchargeid.$error.pattern">半角英数8文字で入力してください。</span>
+        </div>
+      </div>
+    </div>
+    <div class="mdl-card__actions mdl-card--border">
+      <!-- Raised button with ripple -->
+      <button type="button" id="awagSearch" class="white-space mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" ng-click="vm.awagSearch()" ng-disabled="form.$invalid">
+        検索
+      </button>
+      (
+      <label class="mdl-radio  mdl-js-radio mdl-js-ripple-effect" for="option-And">
+        <input class="mdl-radio__button" id="option-And" name="option-AndOr" type="radio" value="false" ng-model="vm.model.search._inclusiveor"/>
+        <span class="mdl-radio__label">And</span>
+      </label>
+      <label class="mdl-radio  mdl-js-radio mdl-js-ripple-effect" for="option-Or">
+        <input class="mdl-radio__button" id="option-Or" name="option-AndOr" type="radio" value="true" ng-model="vm.model.search._inclusiveor"/>
+        <span class="mdl-radio__label">Or</span>
+      </label>
+      <button type="reset" id="btn_reset" class="white-space mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" ng-click="vm.awagReset()">
+        クリア
+      </button>
+      )
+    </div>
+  </div>
+
+  <div class="mdl-card  mdl-shadow--2dp myfitcard">
+    <div class="mdl-card__title mdl-card--border card-title">
+      <h2 class="mdl-card__title-text card-title-text"><i class="material-icons">web_asset</i> コンタクトお客様検索 一覧</h2>
+    </div>
+
+    <div class="mdl-card__supporting-text mdl-card--border">
+      <div class="x-table">
+          <table class="mdl-data-table mdl-shadow--2dp">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th class="mdl-data-table__cell--non-numeric" ng-click="vm.sortList('customerid')" ng-class="{'mdl-data-table__header--sorted-descending': vm.sortKeyList==='-customerid', 'mdl-data-table__header--sorted-ascending': vm.sortKeyList==='+customerid'}">お客様番号</th>
+                <th class="mdl-data-table__cell--non-numeric" ng-click="vm.sortList('nameen')" ng-class="{'mdl-data-table__header--sorted-descending': vm.sortKeyList==='-nameen', 'mdl-data-table__header--sorted-ascending': vm.sortKeyList==='+nameen'}">お客様名（英字）</th>
+                <th class="mdl-data-table__cell--non-numeric" ng-click="vm.sortList('name')" ng-class="{'mdl-data-table__header--sorted-descending': vm.sortKeyList==='-name', 'mdl-data-table__header--sorted-ascending': vm.sortKeyList==='+name'}">お客様名（全角）</th>
+                <th class="mdl-data-table__cell--non-numeric" ng-click="vm.sortList('inchargeid')" ng-class="{'mdl-data-table__header--sorted-descending': vm.sortKeyList==='-inchargeid', 'mdl-data-table__header--sorted-ascending': vm.sortKeyList==='+inchargeid'}">担当者ID</th>
+                <th class="mdl-data-table__cell--non-numeric" ng-click="vm.sortList('rank')" ng-class="{'mdl-data-table__header--sorted-descending': vm.sortKeyList==='-rank', 'mdl-data-table__header--sorted-ascending': vm.sortKeyList==='+rank'}">お客様ランク</th>
+                <th class="mdl-data-table__cell--non-numeric" ng-click="vm.sortList('custclass1')" ng-class="{'mdl-data-table__header--sorted-descending': vm.sortKeyList==='-custclass1', 'mdl-data-table__header--sorted-ascending': vm.sortKeyList==='+custclass1'}">お客様区分1</th>
+                <th class="mdl-data-table__cell--non-numeric" ng-click="vm.sortList('checkbox')" ng-class="{'mdl-data-table__header--sorted-descending': vm.sortKeyList==='-checkbox', 'mdl-data-table__header--sorted-ascending': vm.sortKeyList==='+checkbox'}">顧客承認フラグ</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="item in vm.model.list | limitTo: vm.pager.len :vm.pager.start">
+                <td>
+                  <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="selectedKey{{$index}}">
+                    <input class="mdl-radio__button" id="selectedKey{{$index}}" name="selectedKey" type="radio" ng-value="item" ng-model="vm.selectedKey" ng-click="vm.awagSelect()" />
+                  </label>
+                </td>
+                <td class="mdl-data-table__cell--non-numeric">{{item.customerid}}</td>
+                <td class="mdl-data-table__cell--non-numeric">{{item.nameen}}</td>
+                <td class="mdl-data-table__cell--non-numeric">{{item.name}}</td>
+                <td class="mdl-data-table__cell--non-numeric">{{item.inchargeid}}</td>
+                <td class="mdl-data-table__cell--non-numeric">{{vm.getNameFromValue(vm.rankOpts, item.rank)}}</td>
+                <td class="mdl-data-table__cell--non-numeric">{{vm.getNameFromValue(vm.class1Opts, item.custclass1)}}</td>
+                <td class="mdl-data-table__cell--non-numeric">{{vm.getNameFromValue(vm.approveOpts, item.checkbox)}}</td>
+              </tr>
+            </tbody>
+          </table>
+      </div>
+      <span ng-repeat="page in vm.pager.pagerList">
+        <a class="mdl-navigation__link" ng-click="vm.paginate(vm.pager, page )" ng-if="vm.pager.pagenum!=page" href="javascript:void(0)"> [{{page+1}}] </a>
+        <span class="mdl-navigation__link" ng-click="vm.paginate(vm.pager, page )" ng-if="vm.pager.pagenum==page"> {{page+1}} </span>
+      </span>Page
+    </div>
+
+    <div class="mdl-card__actions mdl-card--border">
+      <!-- Raised button with ripple -->
+      <button type="button" id="goContact" class="white-space mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" ng-click="vm.goContact()" ng-disabled="!vm.modelSelected">
+        コンタクト履歴へ
+      </button>
+    </div>
+  </div>
+
+</form>

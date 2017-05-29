@@ -1,0 +1,112 @@
+<form name="form" action="#">
+  <div class="mdl-card  mdl-shadow--2dp myfitcard">
+    <div class="mdl-card__title mdl-card--border card-title">
+      <h2 class="mdl-card__title-text card-title-text"><i class="material-icons">web_asset</i> 更新確認</h2>
+    </div>
+    <div class="mdl-card__supporting-text mdl-card--border">
+      <div class="mdl-grid">
+        <!-- errors-->
+        <div class="error mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--top mdl-cell--12-col" ng-show="vm.error.details">
+          <div ng-repeat="detail in vm.error.details">
+            <i class="material-icons">warning</i> {{detail.message}} <span ng-show="detail.code.length>0">[</span>{{detail.code}}<span ng-show="detail.code.length>0">]</span> <br/>
+          </div>
+        </div>
+        <!-- 上部メッセージ static text -->
+        <div class="mdl-cell mdl-cell--top mdl-cell--12-col">
+          以下の内容でお客様情報を更新します。よろしいですか。
+        </div>
+        <!-- お客様番号 output -->
+        <div class="mdl-textfield mdl-textfield--floating-label mdl-cell mdl-cell--top mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone is-upgraded" data-upgraded=",MaterialTextfield">
+          <span class="input-floating-label">お客様番号...</span>
+          <span id="customerid" class="mdl-textfield__output">{{vm.model.customerid}}</span>
+        </div>
+        <!-- お客様名（英字） output -->
+        <div class="mdl-textfield mdl-textfield--floating-label mdl-cell mdl-cell--top mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone is-upgraded" data-upgraded=",MaterialTextfield">
+          <span class="input-floating-label">お客様名（英字）...</span>
+          <span id="nameen" class="mdl-textfield__output">{{vm.model.nameen}}</span>
+        </div>
+        <!-- お客様名（全角） output -->
+        <div class="mdl-textfield mdl-textfield--floating-label mdl-cell mdl-cell--top mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone is-upgraded" data-upgraded=",MaterialTextfield">
+          <span class="input-floating-label">お客様名（全角）...</span>
+          <span id="name" class="mdl-textfield__output">{{vm.model.name}}</span>
+        </div>
+        <!-- 担当ID output -->
+        <div class="mdl-textfield mdl-textfield--floating-label mdl-cell mdl-cell--top mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone is-upgraded" data-upgraded=",MaterialTextfield">
+          <span class="input-floating-label">担当ID...</span>
+          <span id="inchargeid" class="mdl-textfield__output">{{vm.model.inchargeid}}</span>
+        </div>
+        <!-- 登録日 output -->
+        <div class="mdl-textfield mdl-textfield--floating-label mdl-cell mdl-cell--top mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone is-upgraded" data-upgraded=",MaterialTextfield">
+          <span class="input-floating-label">登録日...</span>
+          <span id="registereddate" class="mdl-textfield__output">{{vm.model.registereddate}}</span>
+        </div>
+        <!-- お客様名（かな） output -->
+        <div class="mdl-textfield mdl-textfield--floating-label mdl-cell mdl-cell--top mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone is-upgraded" data-upgraded=",MaterialTextfield">
+          <span class="input-floating-label">お客様名（かな）...</span>
+          <span id="hiragana" class="mdl-textfield__output">{{vm.model.hiragana}}</span>
+        </div>
+        <!-- お客様名（カナ） output -->
+        <div class="mdl-textfield mdl-textfield--floating-label mdl-cell mdl-cell--top mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone is-upgraded" data-upgraded=",MaterialTextfield">
+          <span class="input-floating-label">お客様名（カナ）...</span>
+          <span id="katakana" class="mdl-textfield__output">{{vm.model.katakana}}</span>
+        </div>
+        <!-- 概要 output -->
+        <div class="mdl-textfield mdl-textfield--floating-label mdl-cell mdl-cell--top mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone is-upgraded" data-upgraded=",MaterialTextfield">
+          <span class="input-floating-label">概要...</span>
+          <span id="description" class="mdl-textfield__output">{{vm.model.description}}</span>
+        </div>
+        <!-- ISINコード output -->
+        <div class="mdl-textfield mdl-textfield--floating-label mdl-cell mdl-cell--top mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone is-upgraded" data-upgraded=",MaterialTextfield">
+          <span class="input-floating-label">ISINコード...</span>
+          <span id="isin" class="mdl-textfield__output">{{vm.model.isin}}</span>
+        </div>
+        <!-- 法人番号 output -->
+        <div class="mdl-textfield mdl-textfield--floating-label mdl-cell mdl-cell--top mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone is-upgraded" data-upgraded=",MaterialTextfield">
+          <span class="input-floating-label">法人番号...</span>
+          <span id="houjinno" class="mdl-textfield__output">{{vm.model.houjinno}}</span>
+        </div>
+        <!-- お客様ランク Radio-->
+        <div class="mdl-textfield mdl-cell mdl-cell--top mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone">
+          <span class="input-floating-label">お客様ランク ...</span>
+          <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="rank-{{opt.value}}" ng-repeat="opt in vm.rankOpts">
+            <input class="mdl-radio__button" id="rank-{{opt.value}}" name="rank" type="radio" value="{{opt.value}}" ng-model="vm.model.rank"  disabled/>
+            <span class="mdl-radio__label">{{opt.name}}&nbsp;&nbsp;</span>
+          </label>
+        </div>
+        <!-- お客様区分1 Pulldown-->
+        <div class="mdl-textfield mdl-cell mdl-cell--top mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone">
+          <span class="input-floating-label">お客様区分1 ...</span>
+          <select class="mdl-textfield__input height28" id="custclass1" ng-model="vm.model.custclass1"  disabled>
+            <option ng-repeat="opt in vm.class1Opts" value="{{opt.value}}">{{opt.name}}</option>
+          </select>
+        </div>
+        <!-- お客様区分2 Pulldown-->
+        <div class="mdl-textfield mdl-cell mdl-cell--top mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone">
+          <span class="input-floating-label">お客様区分2 ...</span>
+          <select class="mdl-textfield__input height28" id="custclass2" ng-model="vm.model.custclass2"  disabled>
+            <option ng-repeat="opt in vm.class2Opts" value="{{opt.value}}">{{opt.name}}</option>
+          </select>
+        </div>
+        <!-- 承認状況 Checkbox-->
+        <div class="mdl-textfield mdl-cell mdl-cell--top mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone">
+          <span class="input-floating-label">承認状況 ...</span>
+          <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-{{vm.approveOpts[1].value}}"">
+            <input type="checkbox" id="checkbox-{{vm.approveOpts[1].value}}" class="mdl-checkbox__input" ng-model="vm.model.checkbox" ng-true-value="'{{vm.approveOpts[1].value}}'" ng-false-value="'{{vm.approveOpts[0].value}}'"  disabled/>
+            <span class="mdl-checkbox__label">{{vm.approveOpts[1].name}}</span>
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="mdl-card__actions mdl-card--border">
+      <!-- Raised button with ripple -->
+      <button type="button" id="awagGoback" class="white-space mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" ng-click="vm.awagGoback()">
+        入力へ戻る
+      </button>
+      <!-- Raised button with ripple -->
+      <button type="button" id="update" class="white-space mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" ng-click="vm.update()" ng-disabled="form.$invalid">
+        更新
+      </button>
+    </div>
+  </div>
+
+</form>

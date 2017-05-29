@@ -1,0 +1,83 @@
+<form name="form" action="#">
+  <div class="mdl-card  mdl-shadow--2dp myfitcard">
+    <div class="mdl-card__title mdl-card--border card-title">
+      <h2 class="mdl-card__title-text card-title-text"><i class="material-icons">web_asset</i> 承認確認</h2>
+    </div>
+
+    <div class="mdl-card__supporting-text mdl-card--border">
+      <!-- errors-->
+      <div class="error mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--12-col" ng-show="vm.error.details">
+        <div ng-repeat="detail in vm.error.details">
+            <i class="material-icons">warning</i> {{detail.message}} <span ng-show="detail.code.length>0">[</span>{{detail.code}}<span ng-show="detail.code.length>0">]</span> <br/>
+        </div>
+      </div>
+      <div class="x-table">
+          <table class="mdl-data-table mdl-shadow--2dp">
+            <thead>
+              <tr>
+                <th class="mdl-data-table__cell--non-numeric">お客様番号</th>
+                <th class="mdl-data-table__cell--non-numeric">お客様名（英字）</th>
+                <th class="mdl-data-table__cell--non-numeric">お客様名（全角）</th>
+                <th class="mdl-data-table__cell--non-numeric">担当者名</th>
+                <th class="mdl-data-table__cell--non-numeric">コメント</th>
+                <th class="mdl-data-table__cell--non-numeric">ランク</th>
+                <th class="mdl-data-table__cell--non-numeric">ステータス</th>
+                <th class="mdl-data-table__cell--non-numeric">フラグ</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="item in vm.model.list">
+                <td class="mdl-data-table__cell--non-numeric" ng-form="itemForm1">
+                  {{item.customerid}}
+                </td>
+                <td class="mdl-data-table__cell--non-numeric" ng-form="itemForm2">
+                  {{item.nameen}}
+                </td>
+                <td class="mdl-data-table__cell--non-numeric" ng-form="itemForm3">
+                  {{item.name}}
+                </td>
+                <td class="mdl-data-table__cell--non-numeric" ng-form="itemForm4">
+                  {{item.staff.name}}
+                </td>
+                <td class="mdl-data-table__cell--non-numeric" ng-form="itemForm5">
+                  {{item.approvelog.comment}}
+                </td>
+                <td class="mdl-data-table__cell--non-numeric" ng-form="itemForm6">
+                  <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="approvelog.rank-{{opt.value}}-{{$parent.$index}}" ng-repeat="opt in vm.rankOpts2">
+                    <input class="mdl-radio__button" id="approvelog.rank-{{opt.value}}-{{$parent.$index}}" name="approvelog.rank-{{$parent.$index}}" type="radio" value="{{opt.value}}" ng-model="item.approvelog.rank"  disabled/>
+                    <span class="mdl-radio__label">{{opt.name}}&nbsp;&nbsp;</span>
+                  </label>
+                  <span class="awag-textfield__error" ng-show="!itemForm6.$valid">必須です</span>
+                </td>
+                <td class="mdl-data-table__cell--non-numeric" ng-form="itemForm7">
+                  <select class="mdl-textfield__input height28" id="approvelog.status" ng-model="item.approvelog.status"  disabled style="min-width: 80px;">
+                    <option ng-repeat="opt in vm.class2Opts" value="{{opt.value}}">{{opt.name}}</option>
+                  </select>
+                  <span class="awag-textfield__error" ng-show="!itemForm7.$valid">必須です</span>
+                </td>
+                <td class="mdl-data-table__cell--non-numeric" ng-form="itemForm8">
+                  <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-{{vm.approveOpts[1].value}}-{{$index}}">
+                    <input type="checkbox" id="checkbox-{{vm.approveOpts[1].value}}-{{$index}}" class="mdl-checkbox__input" ng-model="item.checkbox" ng-true-value="'{{vm.approveOpts[1].value}}'" ng-false-value="'{{vm.approveOpts[0].value}}'"  disabled/>
+                    <span class="mdl-checkbox__label">{{vm.approveOpts[1].name}}</span>
+                  </label>
+                  <span class="awag-textfield__error" ng-show="!itemForm8.$valid">必須です</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+      </div>
+    </div>
+
+    <div class="mdl-card__actions mdl-card--border">
+      <!-- Raised button with ripple -->
+      <button type="button" id="confirm" class="white-space mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" ng-click="vm.confirm()" ng-disabled="form.$invalid">
+        更新
+      </button>
+      <!-- Raised button with ripple -->
+      <button type="button" id="back" class="white-space mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" ng-click="vm.back()">
+        戻る
+      </button>
+    </div>
+  </div>
+
+</form>

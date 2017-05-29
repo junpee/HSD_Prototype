@@ -1,0 +1,31 @@
+<div class="mdl-card  mdl-shadow--2dp myfitcard">
+  <div class="mdl-card__title mdl-card--border card-title">
+    <h2 class="mdl-card__title-text card-title-text"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Home</h2>
+  </div>
+  <div class="mdl-card__supporting-text mdl-card--border">
+    <div class="" ng-controller="HomeCtrl as home">
+      {{home.message}}
+      <br /><br />
+      <a href="#!/inputcustomer" ng-click="home.start()">
+        <button id="btn_inputcustomer" class="mdl-button mdl-js-button mdl-button--primary" formaction="#!/inputcustomer">
+          お客様登録
+        </button></a>
+      <br />
+      <a href="#!/maintenance" ng-click="home.start()">
+        <button id="btn_maintenance" class="mdl-button mdl-js-button mdl-button--primary" formaction="#!/maintenance">
+          お客様情報メンテ
+        </button></a>
+      <br />
+      <a href="#!/approve" ng-click="home.start()">
+        <button id="btn_approve" class="mdl-button mdl-js-button mdl-button--primary" formaction="#!/approve">
+          一括承認
+        </button></a>
+      <br />
+      <a href="#!/contact" ng-click="home.start()">
+        <button id="btn_contact" class="mdl-button mdl-js-button mdl-button--primary" formaction="#!/contact">
+          コンタクト履歴登録
+        </button></a>
+      <br />
+    </div>
+  </div>
+</div>
