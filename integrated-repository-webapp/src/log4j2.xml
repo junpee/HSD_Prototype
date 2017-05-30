@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Log4j2 Configuration file -->
+<Configuration status="off">
+
+	<!-- Property configurations (referred by Appenders or Loggers -->
+	<Properties>
+		<!-- Log Pattern Layout -->
+		<Property name="patternLayout" value="[%d{yyyy/MM/dd HH:mm:ss.SSS}] %-5p [%t] %m%n" />
+	</Properties>
+
+	<!-- Appender configurations (logging output destinations and logging formats) -->
+	<Appenders>
+		<!-- ConsoleAppender configuration -->
+		<Console name="Console" target="SYSTEM_OUT">
+			<PatternLayout pattern="${patternLayout}" />
+		</Console>
+	</Appenders>
+
+	<!-- combination with Appenders and LogLevel for each java packages -->
+	<Loggers>
+		<!-- Use "Console" as default(root) appender. -->
+		<Root level="info">
+			<AppenderRef ref="Console" />
+		</Root>
+
+		<!-- Use "Console" for IntegratedRepository WebApp -->
+		<Logger name="com.ibm.integratedrepository" level="info"
+			additivity="false">
+			<AppenderRef ref="Console" />
+		</Logger>
+	</Loggers>
+
+</Configuration>

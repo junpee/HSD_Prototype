@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Implementation-Title: war
+Implementation-Version: 1.2.0.20170519-0526+0000
+Built-By: travis
+Specification-Vendor: IBM
+Specification-Title: war
+Implementation-Vendor-Id: com.ibm.integratedrepository
+Created-By: Apache Maven 3.2.5
+Build-Jdk: 1.8.0_121
+Specification-Version: 1.2
+Implementation-URL: http://maven.apache.org
+Implementation-Vendor: IBM
+

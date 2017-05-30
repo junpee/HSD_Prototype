@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	
+	<xs:element name="configs" type="configsType"/>
+	
+	<xs:complexType name="configsType">
+		<xs:choice minOccurs="0" maxOccurs="unbounded">
+			<xs:element name="config" type="configType"/>
+			<xs:element name="config-group" type="configGroupType"/>
+		</xs:choice>
+	</xs:complexType>
+	
+	<xs:complexType name="configGroupType">
+		<xs:choice minOccurs="0" maxOccurs="unbounded">
+			<xs:element name="config" type="configType"/>
+			<xs:element name="config-group" type="configGroupType"/>
+		</xs:choice>
+		<xs:attribute name="name" type="xs:string" use="required"/>
+	</xs:complexType>
+	
+	<xs:complexType name="configType">
+		<xs:choice minOccurs="0" maxOccurs="1">
+			<xs:element name="value" type="xs:string"/>
+			<xs:element name="list" type="listType"/>
+			<xs:element name="map" type="mapType"/>
+		</xs:choice>
+		<xs:attribute name="name" type="xs:string" use="required"/>
+		<xs:attribute name="value" type="xs:string"/>
+	</xs:complexType>
+	
+	<xs:complexType name="listType">
+		<xs:sequence minOccurs="0" maxOccurs="unbounded">
+			<xs:element name="value" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="mapType">
+		<xs:sequence minOccurs="0" maxOccurs="unbounded">
+			<xs:element name="entry" type="entryType"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="entryType">
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="key" type="xs:string" use="required"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	
+</xs:schema>
+

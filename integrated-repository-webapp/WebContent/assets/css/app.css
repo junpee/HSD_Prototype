@@ -1,0 +1,44 @@
+/*** styles in assets/css/app.css are applied to the whole page ***/
+body {
+  min-height: 900px;
+  padding-bottom: 50px;
+}
+
+footer {
+  text-align: center;
+  font-size: 0.8em;
+}
+
+/*** Angular 2 link without href (href属性がない<a>要素でも、カーソルをポインタにする) ***/
+a:not([href]){
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
+
+/* Dragulaドラッグ&ドロップのハンドルにマウスオンした時のカーソルのスタイル */
+.drag-handle {
+    cursor: pointer;
+}
+
+/* ColorPicker文字色／背景色編集のスタイル */
+td.color-picker {
+    padding: 0px 5px 0px 0px;
+}
+td.color-picker div {
+    padding: 1px 1px 0px;
+    border-radius: 6px;
+    background-color: #eff1f4;
+}
+td.color-picker-input {
+    padding-right: 30px;
+}
+
+/* タグのスタイル */
+span.tag-icon {
+    display: inline-block;
+    margin: 2px 2px;
+    padding: 2px 10px;
+    border-radius: 8px;
+}

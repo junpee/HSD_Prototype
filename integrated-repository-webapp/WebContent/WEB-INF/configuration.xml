@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="configuration.xsd">
+
+	<!-- Configurations for Built-in Generators -->
+
+
+	<!-- TemplatedHelloWorldGenerators -->
+	<config-group name="TemplatedHelloWorldGenerator">
+		<config name="templateResourcePath">
+			<value>template/generator/builtin/sample/templated-hello-world.flt</value>
+		</config>
+	</config-group>
+	<config-group name="TemplatedDdlGeneratorDB2">
+		<config name="templateResourcePath">
+			<value>template/generator/builtin/ddl/datamodel-entity-to-ddl-for-db2.ftl</value>
+		</config>
+	</config-group>
+	<config-group name="TemplatedDdlGeneratorOracle">
+		<config name="templateResourcePath">
+			<value>template/generator/builtin/ddl/datamodel-entity-to-ddl-for-oracle.ftl</value>
+		</config>
+	</config-group>
+
+	<!-- Configurations for Built-in Uploaders -->
+
+
+	<!-- Configurations for Built-in Schedulers -->
+
+
+	<!-- User Defined -->
+
+
+</configs>
